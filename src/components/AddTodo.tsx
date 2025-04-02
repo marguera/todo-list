@@ -2,7 +2,11 @@
 
 import { useState } from 'react';
 
-export default function AddTodo() {
+interface AddTodoProps {
+  onAddTodo?: () => void;
+}
+
+export default function AddTodo({ onAddTodo }: AddTodoProps) {
   const [text, setText] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -31,8 +35,11 @@ export default function AddTodo() {
       }
       
       setText('');
-      // Force a refresh of the parent TodoList component by causing a re-render
-      window.location.reload();
+      
+      // Call the onAddTodo callback to refresh the list
+      if (onAddTodo) {
+        onAddTodo();
+      }
     } catch (err) {
       setError('Failed to add todo. Please try again.');
       console.error(err);
