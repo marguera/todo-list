@@ -49,23 +49,37 @@ export default function AddTodo({ onAddTodo }: AddTodoProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mt-4">
-      {error && <p className="text-red-500 mb-2">{error}</p>}
-      <div className="flex items-center">
+    <form onSubmit={handleSubmit} className="w-full">
+      {error && (
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+          <p className="text-red-500 text-sm">{error}</p>
+        </div>
+      )}
+      <div className="relative flex items-center">
         <input
           type="text"
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Add a new todo..."
-          className="flex-grow p-2 border border-gray-300 dark:border-gray-600 rounded-l focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+          placeholder="What needs to be done?"
+          className="w-full p-3 pl-4 pr-24 rounded-lg border-2 border-indigo-100 focus:border-indigo-300 focus:outline-none text-gray-700 shadow-sm"
           disabled={loading}
         />
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-r transition-colors duration-200 disabled:bg-blue-300"
+          className="absolute right-2 bg-indigo-600 hover:bg-indigo-700 text-white py-1.5 px-4 rounded-md transition-colors duration-200 disabled:bg-gray-300 text-sm font-medium"
           disabled={loading || !text.trim()}
         >
-          {loading ? 'Adding...' : 'Add'}
+          {loading ? (
+            <span className="flex items-center">
+              <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Adding
+            </span>
+          ) : (
+            'Add Task'
+          )}
         </button>
       </div>
     </form>

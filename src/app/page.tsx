@@ -13,13 +13,18 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm">
-        <h1 className="text-4xl font-bold mb-8 text-center">Todo List App</h1>
-        <div className="bg-white dark:bg-gray-800 shadow-xl rounded-lg p-6 w-full max-w-md mx-auto">
+    <main className="flex min-h-screen flex-col items-center justify-start p-4 md:p-8 bg-gradient-to-b from-blue-50 to-indigo-100">
+      <div className="w-full max-w-xl">
+        <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center text-indigo-700">
+          ✓ My Todo List
+        </h1>
+        <div className="bg-white shadow-2xl rounded-xl p-6 border border-indigo-100">
           <AddTodo onAddTodo={handleAddTodo} />
           <TodoList key={refreshKey} />
         </div>
+        <p className="text-center text-xs mt-6 text-indigo-500">
+          Built with Next.js and Tailwind CSS
+        </p>
       </div>
     </main>
   )

@@ -4,16 +4,19 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-rgb: 255, 255, 255;
+  --background-rgb: 243, 244, 246;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
-  padding: 1rem;
+  font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-.container {
-  max-width: 600px;
-  margin: 0 auto;
+@layer base {
+  input[type="checkbox"] {
+    @apply cursor-pointer h-5 w-5 rounded;
+    @apply border-gray-300 text-indigo-600 focus:ring-indigo-500;
+  }
 }

@@ -72,27 +72,47 @@ export default function TodoList() {
   };
 
   if (loading) {
-    return <div className="mt-4 text-center">Loading todos...</div>;
+    return (
+      <div className="mt-6 text-center py-10">
+        <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-indigo-500"></div>
+        <p className="mt-2 text-indigo-500">Loading your todos...</p>
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="mt-4 text-red-500">{error}</div>;
+    return (
+      <div className="mt-6 p-4 bg-red-50 text-red-500 rounded-lg border border-red-200 text-center">
+        <p className="font-medium">{error}</p>
+        <p className="text-sm mt-1">Try refreshing the page.</p>
+      </div>
+    );
   }
 
   if (todos.length === 0) {
-    return <div className="mt-4 text-gray-500 text-center">No todos yet. Add one above!</div>;
+    return (
+      <div className="mt-6 p-8 text-center">
+        <div className="text-5xl mb-3">📝</div>
+        <p className="text-gray-500">Your list is empty. Add your first task above!</p>
+      </div>
+    );
   }
 
   return (
-    <ul className="mt-4 space-y-2">
-      {todos.map(todo => (
-        <TodoItem
-          key={todo.id}
-          todo={todo}
-          onToggle={toggleTodoStatus}
-          onDelete={deleteTodo}
-        />
-      ))}
-    </ul>
+    <div className="mt-6">
+      <h2 className="text-sm uppercase tracking-wide text-gray-500 font-semibold mb-3">
+        Your Tasks ({todos.filter(t => !t.completed).length} remaining)
+      </h2>
+      <ul className="space-y-1">
+        {todos.map(todo => (
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            onToggle={toggleTodoStatus}
+            onDelete={deleteTodo}
+          />
+        ))}
+      </ul>
+    </div>
   );
 }
